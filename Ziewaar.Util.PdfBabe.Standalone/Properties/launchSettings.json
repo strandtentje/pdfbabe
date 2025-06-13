@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Ziewaar.Util.PdfBabe.Standalone": {
+      "commandName": "Project",
+      "commandLineArgs": "test.pdf"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziewaar.Util.PdfBabe.Standalone", "Ziewaar.Util.PdfBabe.Standalone\Ziewaar.Util.PdfBabe.Standalone.csproj", "{90F6B20D-3C7C-4EEA-98B7-EED9C4218646}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziewaar.Util.PdfBabe", "Ziewaar.Util.PdfBabe\Ziewaar.Util.PdfBabe.csproj", "{085489C4-1B47-4BA4-B2C9-907E2518E2BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90F6B20D-3C7C-4EEA-98B7-EED9C4218646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F6B20D-3C7C-4EEA-98B7-EED9C4218646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90F6B20D-3C7C-4EEA-98B7-EED9C4218646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90F6B20D-3C7C-4EEA-98B7-EED9C4218646}.Release|Any CPU.Build.0 = Release|Any CPU
+		{085489C4-1B47-4BA4-B2C9-907E2518E2BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{085489C4-1B47-4BA4-B2C9-907E2518E2BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{085489C4-1B47-4BA4-B2C9-907E2518E2BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{085489C4-1B47-4BA4-B2C9-907E2518E2BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E156971-62BF-499D-912F-285199937B2A}
+	EndGlobalSection
+EndGlobal
