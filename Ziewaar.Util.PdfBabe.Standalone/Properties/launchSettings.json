@@ -2,7 +2,7 @@
   "profiles": {
     "Ziewaar.Util.PdfBabe.Standalone": {
       "commandName": "Project",
-      "commandLineArgs": "test.pdf"
+      "commandLineArgs": "test3.pdf"
     }
   }
 }

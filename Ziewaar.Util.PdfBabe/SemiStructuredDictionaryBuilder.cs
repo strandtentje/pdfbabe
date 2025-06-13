@@ -38,7 +38,8 @@ public class SemiStructuredDictionaryBuilder(Dictionary<string, string> _replace
         while (dict.ContainsKey(key))
             key += "_";
         object value = decimal.TryParse(stringValue, out var decimalValue) ? decimalValue : stringValue.Trim();
-        dict.Add(key.SanitizeCamelCase(replacements), value);
+        var candidate = key.SanitizeCamelCase(replacements);
+        dict.Add(candidate, value);
     }
 
     public void AddTitledNameValueTuple(string stringLeft, string stringRight)
@@ -125,10 +126,10 @@ public class SemiStructuredDictionaryBuilder(Dictionary<string, string> _replace
         }
         else if (workingObject != null)
         {
-            var candidateTitle = lastTextLine ?? $"text{textBlockCounter++}";
+            var candidateTitle = (lastTextLine ?? $"text{textBlockCounter++}").SanitizeCamelCase(replacements);
             while (output.ContainsKey(candidateTitle))
                 candidateTitle += "_";
-            output.Add(candidateTitle.SanitizeCamelCase(replacements), workingObject);
+            output.Add(candidateTitle, workingObject);
         }
         workingMode = requestedMode;
         workingObject = null;

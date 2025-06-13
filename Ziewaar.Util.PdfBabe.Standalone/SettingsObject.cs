@@ -9,14 +9,13 @@ public class SettingsObject(ParsedArgs parsed)
     public bool EnableDelimiterTuples => parsed.Options.GetBoolFrom("dt", true);
     public char TupleDelimiter => parsed.Options.GetCharFrom("td", ':');
     public bool TryTitledTuples => parsed.Options.GetBoolFrom("tt", true);
-    public bool UsingStdIo => parsed.Options.GetBoolFrom("io", false);
     public bool JsonIndent => parsed.Options.GetBoolFrom("pp", true);
     public Dictionary<string, string> Replacements
     {
         get
         {
             var ndict = parsed.Options.Where(x => x.Value is string).ToDictionary(x => x.Key, x => (string)x.Value);
-            string[] settingsKeys = ["vlr", "gt", "dt", "td", "tt", "io", "pp"];
+            string[] settingsKeys = ["vlr", "gt", "dt", "td", "tt", "pp"];
             foreach (var item in settingsKeys)
             {
                 ndict.Remove(item);

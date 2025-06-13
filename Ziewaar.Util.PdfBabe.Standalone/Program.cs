@@ -8,7 +8,7 @@ internal class Program
     {
         var parsedArgs = ArgParser.Parse(args);
         var settings = new SettingsObject(parsedArgs);
-        var convertor = 
+        var convertor =
             new PdfToJsonConvertor(
                 new PdfLinesFactory(settings.VerticalLineResolution),
                 new RowCellStringFactory(settings.GapTollerance),
@@ -22,45 +22,32 @@ internal class Program
             ? Newtonsoft.Json.Formatting.Indented
             : Newtonsoft.Json.Formatting.None;
 
-        if (settings.UsingStdIo)
+        Console.WriteLine($"converting {parsedArgs.Filenames} files...");
+        foreach (var item in parsedArgs.Filenames)
         {
-            var input = Console.OpenStandardInput();
-            var jsonText = convertor.Convert(
-                input,
-                indentSettings);
-            using (var op = new StreamWriter(Console.OpenStandardOutput()))
+            try
             {
-                op.Write(jsonText);
-            }
-        } else
-        {
-            Console.WriteLine($"converting {parsedArgs.Filenames} files...");
-            foreach (var item in parsedArgs.Filenames)
-            {
-                try
+                string jsonText = "";
+                Console.WriteLine($"reading {item}");
+                using (var or = File.OpenRead(item))
                 {
-                    string jsonText = "";
-                    Console.WriteLine($"reading {item}");
-                    using (var or = File.OpenRead(item)) 
-                    {
-                        jsonText = convertor.Convert(or, indentSettings);
-                    }
-                    Console.WriteLine($"converted {item}");
-                    using (var wr = new StreamWriter($"{item}.json"))
-                    {
-                        wr.Write(jsonText);
-                    }
-                    Console.WriteLine($"written {item}.json");
-                } catch(Exception ex)
-                {
-#if DEBUG
-                    throw;
-#endif
-                    Console.WriteLine($"failed {item} due to {ex}");
+                    jsonText = convertor.Convert(or, indentSettings);
                 }
+                Console.WriteLine($"converted {item}");
+                using (var wr = new StreamWriter($"{item}.json"))
+                {
+                    wr.Write(jsonText);
+                }
+                Console.WriteLine($"written {item}.json");
             }
-            Console.WriteLine("done, terminating.");
-        }        
-        
+            catch (Exception ex)
+            {
+#if DEBUG
+                throw;
+#endif
+                Console.WriteLine($"failed {item} due to {ex}");
+            }
+        }
+        Console.WriteLine("done, terminating.");
     }
 }
