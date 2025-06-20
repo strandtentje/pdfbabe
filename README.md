@@ -7,3 +7,5 @@ flags for the standalone .exe:
  - `-td=:` delimiter char, colon is default, to use for making tuples.
  - `-tt=true` titled tuples, true is default. if it finds undelimited pairs, it'll take the first row as the field names for the json. switch off and see if u like it.
  - `-pp=true` json indentation, true is default.
+ - `-cc=en-US` current locale code. defaults to system locale.
+ 
