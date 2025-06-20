@@ -10,12 +10,13 @@ public class SettingsObject(ParsedArgs parsed)
     public char TupleDelimiter => parsed.Options.GetCharFrom("td", ':');
     public bool TryTitledTuples => parsed.Options.GetBoolFrom("tt", true);
     public bool JsonIndent => parsed.Options.GetBoolFrom("pp", true);
+    public string CultureCode => parsed.Options.GetStringFrom("cc", "en-us");
     public Dictionary<string, string> Replacements
     {
         get
         {
             var ndict = parsed.Options.Where(x => x.Value is string).ToDictionary(x => x.Key, x => (string)x.Value);
-            string[] settingsKeys = ["vlr", "gt", "dt", "td", "tt", "pp"];
+            string[] settingsKeys = ["vlr", "gt", "dt", "td", "tt", "pp", "cc"];
             foreach (var item in settingsKeys)
             {
                 ndict.Remove(item);

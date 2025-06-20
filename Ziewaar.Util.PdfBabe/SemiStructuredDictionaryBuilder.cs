@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.NetworkInformation;
 
@@ -17,7 +18,7 @@ public class SemiStructuredDictionaryBuilder(Dictionary<string, string> _replace
     private string lastTextLine;
     private int textBlockCounter = 1;
 
-    Dictionary<string, string> replacements = _replacements ?? new Dictionary<string, string>();        
+    Dictionary<string, string> replacements = _replacements ?? new Dictionary<string, string>();
 
     public void AddTextLine(string textLine)
     {
@@ -27,6 +28,7 @@ public class SemiStructuredDictionaryBuilder(Dictionary<string, string> _replace
         {
             workingObject = newList = new();
         }
+
         lastTextLine = textLine;
     }
 
@@ -37,7 +39,10 @@ public class SemiStructuredDictionaryBuilder(Dictionary<string, string> _replace
 
         while (dict.ContainsKey(key))
             key += "_";
-        object value = decimal.TryParse(stringValue, out var decimalValue) ? decimalValue : stringValue.Trim();
+        object value =
+            decimal.TryParse(stringValue, NumberStyles.Any, CultureSelection.CurrentDecimalFormat, out var decimalValue)
+                ? decimalValue
+                : stringValue.Trim();
         var candidate = key.SanitizeCamelCase(replacements);
         dict.Add(candidate, value);
     }
@@ -52,13 +57,13 @@ public class SemiStructuredDictionaryBuilder(Dictionary<string, string> _replace
         }
         else
         {
-            object left = decimal.TryParse(stringLeft, out var leftValue) ? leftValue : stringLeft.Trim();
-            object right = decimal.TryParse(stringRight, out var rightValue) ? rightValue : stringRight.Trim();
+            object left = decimal.TryParse(stringLeft, NumberStyles.Any, CultureSelection.CurrentDecimalFormat, out var leftValue) ? leftValue : stringLeft.Trim();
+            object right = decimal.TryParse(stringRight, NumberStyles.Any, CultureSelection.CurrentDecimalFormat, out var rightValue) ? rightValue : stringRight.Trim();
             list.Add(new Dictionary<string, object>()
-                {
-                    { leftTitle, left },
-                    { rightTitle, right },
-                });
+            {
+                { leftTitle, left },
+                { rightTitle, right },
+            });
         }
     }
 
@@ -103,9 +108,10 @@ public class SemiStructuredDictionaryBuilder(Dictionary<string, string> _replace
             {
                 var key = tableTitles.ElementAtOrDefault(i) ?? $"col{i}";
                 var valueString = multipleWords.ElementAtOrDefault(i) ?? "";
-                object value = decimal.TryParse(valueString, out var decimalValue) ? decimalValue : valueString.Trim();
+                object value = decimal.TryParse(valueString, NumberStyles.Any, CultureSelection.CurrentDecimalFormat, out var decimalValue) ? decimalValue : valueString.Trim();
                 newRow.Add(key, value);
             }
+
             table.Add(newRow);
         }
     }
@@ -131,6 +137,7 @@ public class SemiStructuredDictionaryBuilder(Dictionary<string, string> _replace
                 candidateTitle += "_";
             output.Add(candidateTitle, workingObject);
         }
+
         workingMode = requestedMode;
         workingObject = null;
         req = default(TRequired);

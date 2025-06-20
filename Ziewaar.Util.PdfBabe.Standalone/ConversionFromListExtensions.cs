@@ -37,6 +37,25 @@ public static class ConversionFromListExtensions
             return fallback;
         }
     }
+
+    public static string GetStringFrom(this SortedList<string, object> keyValuePairs, string key, string fallback)
+    {
+        if (keyValuePairs.TryGetValue(key, out var val))
+        {
+            try
+            {
+                return val.ToString() ?? fallback;
+            }
+            catch (Exception)
+            {
+                return fallback;
+            }
+        }
+        else
+        {
+            return fallback;
+        }
+    }
     public static char GetCharFrom(this SortedList<string, object> keyValuePairs, string key, char fallback)
     {
         if (keyValuePairs.TryGetValue(key, out var val))

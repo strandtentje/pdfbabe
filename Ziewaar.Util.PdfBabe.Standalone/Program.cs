@@ -8,6 +8,7 @@ internal class Program
     {
         var parsedArgs = ArgParser.Parse(args);
         var settings = new SettingsObject(parsedArgs);
+        CultureSelection.SetToSpecific(settings.CultureCode);
         var convertor =
             new PdfToJsonConvertor(
                 new PdfLinesFactory(settings.VerticalLineResolution),
